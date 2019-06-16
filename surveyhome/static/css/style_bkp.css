@@ -1,0 +1,364 @@
+
+
+.generic_header{
+  padding: 20px 10px;
+  width:100%;
+  height:10%;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 25px;
+  line-height: 20px;
+  display: inline;
+  position: absolute;
+  overflow: hidden;
+}
+body{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #3aafa9;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /* margin-top: -15px; */
+}
+.generic_header .logo{
+  padding: 10px 50px;
+  text-align: justify;
+  position: absolute;
+  z-index: 1;
+}
+.logo a{
+  text-decoration: none;
+  color: #fff;
+  /* z-index: 1; */
+}
+.contact_button{
+  position: relative;
+  padding: 10px 0;
+  /* text-align: justify; */
+
+}
+.contact_button #contact_btn{
+  margin: 0px 30px 8px 85%;
+  border-radius: 25px;
+  background-color: #18252a;
+  padding: 8px 25px 8px 25px;
+  width:50px;
+  border: none;
+  font-size: 13px;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  /* position: relative; */
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+.sticky + .content {
+  padding-top: 60px;
+}
+.content {
+  padding: 16px;
+}
+
+svg {
+
+  stroke: #fff;
+  stroke-width: 1;
+  width: 5em;
+  height: 5em;
+  z-index: 1;
+}
+
+.toogle_line{
+  position: relative;
+  margin: -23px 30px 0px 95%;
+}
+
+.contact_button #toogle_link :hover{
+  stroke-width: 2;
+}
+
+.sideNavBar{
+  position: fixed;
+  z-index: 1;
+  margin-right: 0;
+  margin-left: 85%;
+  height: 100%;
+  background: #18252a;
+  transition: all 0.5s ease-out;
+  width:0px;
+  top:0;
+  left:0;
+  overflow-x: hidden;
+
+  /* display: none; */
+   float: right;
+ /* right:100%; */
+ /* right:100%; */
+  /* margin-top: -20px; */
+}
+.sideNavBar a{
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 25px;
+  padding: 18px 8px 8px 32px;
+  display: block;
+  transition: 0.3s;
+
+}
+
+#sideNavBarClose{
+  /* padding: 140px 10px 0 125px; */
+  height: 35px;
+  width: 35px
+  top:50px;
+  right:25px;
+  margin-left: 300px;
+}
+
+.sideNavBar #sideNavBarClose :hover{
+  stroke: #3aafa9;
+}
+
+
+@media screen and (max-height: 450px) {
+  /* .sideNavBar {padding-top: 15px;}
+  .sideNavBar a {font-size: 18px;} */
+}
+
+.classname{
+  animation-name: reducetime;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+@keyframes reducetime {
+  from {
+    margin-left: 100%;
+    width: 0;
+  }
+  to {
+    margin-left: 75%;
+    width: 25%;
+  }
+}
+
+.classname1{
+  animation-name: reducetimereverse;
+  animation-duration: 1s;
+
+}
+@keyframes reducetimereverse {
+  from {
+    margin-left: 75%;
+    width: 25%;
+  }
+  to {
+    margin-left: 100%;
+    width: 0;
+  }
+}
+
+
+.main{
+  position: relative;
+  margin: 10% 25% 450px 25%;
+  width:50%;
+  padding: 0 0 0 150px;
+
+}
+
+.intro{
+  font-size: 100px;
+  /* font-family: 'Fredoka One', cursive; */
+  font-family: 'Passion One', cursive;
+  line-height: 70px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.title{
+  font-size: 100px;
+  /* font-family: 'Fredoka One', cursive; */
+  font-family: 'Passion One', cursive;
+  padding-top: 10px;
+  line-height: 70px;
+  letter-spacing: 1px;
+  color:#18252a;
+}
+
+.caption{
+  font-size: 25px;
+  font-family: 'Bangers', cursive;
+  padding-top: 10px;
+  /* line-height: 70px; */
+  letter-spacing: 1px;
+  color:#18252a;
+}
+.signup{
+  position: absolute;
+  margin: 10px;
+  margin-top: 10px;
+  padding-top: 10%;
+  background: #18252a;
+  margin-left: -20px;
+  margin-right: -20px;
+  max-height: 600px;
+  /* position: relative; */
+  /* margin-top: 100%; */
+}
+
+.signup_left {
+  position: relative;
+  /* background: #18252a; */
+  float: left;
+  width:50%;
+  /* margin-top: 10%; */
+  margin-right: 50%;
+  padding-top: 10px;
+  padding-bottom: 10%;
+}
+input{
+  margin: 15px 25%;
+  height: 25px;
+  width:300px;
+}
+.signup_left h3{
+  margin-top: -100px;
+  float: right;
+  color: #3aafa9;
+  font-size: 30px;
+  font-family: 'Bangers', cursive;
+}
+
+.signup_left form button{
+  border-radius: 100px 100px 100px 100px;
+   padding: 10px 30px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 30px 25% 30px 25%;
+  height: 50px;
+  width:300px;
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+}
+
+.signup_left form p{
+  font-family: 'Bangers', cursive;
+  color: #3aafa9;
+  font-size: 15px;
+  /* text-align: center; */
+  margin: 15px 25%;
+}
+
+.signup_left form button:hover{
+  background:#3aafa9;
+
+}
+.signin{
+  position:absolute;
+  margin: 10px;
+  margin-top: 450px;
+  margin-bottom: 10px;
+  top: 190%;
+  /* background: #18252a; */
+  margin-left: -20px;
+  margin-right: -20px;
+  max-height: 750px;
+}
+
+.signin .signin_left{
+  padding: 50px 30px;
+}
+
+.signin_left form .button{
+  border-radius: 100px 100px 100px 100px;
+  padding: 10px 30px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 30px 25% 30px 25%;
+  height: 50px;
+  width:300px;
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+}
+
+.signin_left form p{
+  font-family: 'Bangers', cursive;
+  color: #3aafa9;
+  font-size: 15px;
+  /* text-align: center; */
+  margin: 15px 25%;
+  color: #18252a;
+}
+.signin_left h3{
+  /* margin-top: -100px; */
+  margin: 30px 25% 30px 35%;
+  float: center ;
+  color: #18252a;
+  font-size: 30px;
+  font-family: 'Bangers', cursive;
+  /* z-index: 1; */
+}
+.signin_left form .button:hover{
+  background:#778899;
+
+}
+.contactpg{
+  position:absolute;
+  margin: 10px;
+  margin-top: 1000px;
+  margin-bottom: 10px;
+  top: 190%;
+  background: #18252a;
+  margin-left: -20px;
+  margin-right: -20px;
+  max-height: 850px;
+  width:100%;
+  align-items: center;
+}
+.contactpg_content{
+  padding: 25px 25px 25px 25px;
+}
+.contactpg p{
+  text-align: center;
+  /* font-family: 'Lobster', cursive; */
+  /* font-family: 'Dancing Script', cursive; */
+  font-family: 'Cookie', cursive;
+  color: #fff;
+  font-size: 25px;
+  margin: 5px;
+  margin-top: 25px;
+  /* padding: 15px;
+  padding-top: 25px; */
+}
+
+.contactpg button{
+  border-radius: 100px 100px 100px 100px;
+  padding: 10px 30px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 20px 25% 30px 38%;
+  height: 50px;
+  width:300px;
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+}
+
+.contactpg input{
+    margin: 15px 35%;
+    height: 25px;
+    width:400px;
+}
+
+.contactpg textarea{
+  margin: 15px 35%;
+}

@@ -1,0 +1,41 @@
+{% load static %}
+<div class="signin {% if form == 'form' %} active{% endif %}" id="signin">
+  <div class="signin_left">
+    <div class="signin_header">
+      Log in to get track<br>
+      of your suvey response
+    </div>
+    <form class="" action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" value="" size="50" placeholder="Email" required>
+      <input type="password" name="password" value="" size="50" placeholder="Password" required>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      <button class="button" type="submit" name="button">Sign In</button>
+    </form>
+    <div class="signin_forgetpwd">
+      <a href="{% url 'password_change' %}">Forgot Password?</a>
+    </div>
+
+  </div>
+  <div class="signin_google">
+    <div class="signin_google_border">
+      <div class="signin_google_content">
+        or Sign In With
+      </div>
+    </div>
+    <div class="signin_google_link">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+    </div>
+
+
+  </div>
+  <div class="signin_right">
+
+  </div>
+</div>

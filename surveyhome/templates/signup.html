@@ -1,0 +1,42 @@
+{% load static %}
+<div id="signup" class="signup">
+  <div class="signup_right">
+    <div class="signup_header">
+      A free account is just<br>
+      few clicks away!!
+    </div>
+    <form class="" action="{% url 'register' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" value="" size="50" placeholder="Username" required>
+      <input type="text" name="first_name" value="" size="50" placeholder="First Name" required>
+      <input type="text" name="last_name" value="" size="50" placeholder="Second Name" required>
+      <input type="password" name="password1" value="" size="50" placeholder="Password" required>
+      <input type="password" name="password2" value="" size="50" placeholder="Confirm Password" required >
+      <input type="text" name="email" value="" size="50" placeholder="Email" required>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      <!-- <input type="text" name="" value="" size="50" placeholder="Email"> -->
+      <button type="submit" name="button">Sign Up</button>
+    </form>
+    <div class="signup_google">
+      <div class="signup_google_border">
+        <div class="signup_google_content">
+          or Sign up With
+        </div>
+
+      </div>
+      <div class="signup_google_link">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="signup_left">
+  </div>
+</div>

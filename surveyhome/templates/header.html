@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Passion+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Carter+One&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="navbar" class="generic_header">
+      <div class="logo">
+        <a href="#">SURVEY<br>BOOTH</a>
+      </div>
+      <div class="contact_button">
+        <a id="contact_btn" href="#"><i>Contact</i></a>
+        <a id="toogle_link" onclick="openNavBar()">
+          <svg class="toogle_line" id="toogle_line" viewbox="0 0 40 40">
+            <path id="toogle_link_path" d="M0,5 75,5 M0,20 75,20 M0,35 75,35" />
+          </svg>
+        </a>
+      </div>
+      <div id="sideNavBar" class="sideNavBar">
+          <a id = "sideNavBarClose" onclick="closeNavBar()">
+              <svg id="sideNavBarCloseSVG" viewbox="0 0 35 35">
+                <path d="M5,5 25,25" />
+                <path d="M5,25 25,5" />
+              </svg>
+          </a>
+          <a href="{% url 'register' %}"onclick="closeNavBar();signup()">SIGN UP</a>
+          <a onclick="closeNavBar();signin()">SIGN IN</a>
+          <a onclick="closeNavBar();contact()">CONTACT</a>
+      </div>
+    </div>
+    {% block content %}
+    {% endblock content %}
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"type="text/javascript">
+    </script>
+  </body>

@@ -1,0 +1,17 @@
+{% load static %}
+<div class="contactpg">
+  <div class="contactpg_header">
+    Wanna Speak with us<br>
+    We are just a click away
+  </div>
+  <div class="contactpg_form">
+    <form class="" action="{% url 'email' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="from_email" value="" size="75" placeholder="Your Email ID" required>
+      <input type="text" name="subject" value="" size="75" placeholder="Email subject" required>
+      <textarea name="message" rows="15" cols="77" placeholder="Your message goes here!!"required></textarea>
+      <button type="submit" name="button">Send</button>
+    </form>
+  </div>
+</div>
+</div>

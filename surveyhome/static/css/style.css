@@ -1,0 +1,649 @@
+body{
+  background-color: #3aafa9;
+  display:grid;
+  grid-template-areas:
+  "header"
+  "content";
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing:border-box;
+}
+.logo{
+  grid-area: logo;
+  grid-column: 1/ span 1;
+  margin-left: 25px;
+
+}
+.contact_button{
+  grid-area: contact;
+  grid-column: 3/ span 1;
+  display: grid;
+  /* flex-direction: row; */
+  /* justify-content:space-around;
+  align-items: flex-start; */
+  grid-column-gap: 35px;
+  /* justify-items: end;
+  align-content: end; */
+  grid-template-areas:
+  "contactbutton sidebarlink"
+
+
+}
+.generic_header{
+  grid-area: header;
+  display: grid;
+  grid-template-columns:5fr 1fr;
+  grid-gap: 10px;
+  /* font-family: 'Luckiest Guy', cursive; */
+  /* font-family: 'Anton', sans-serif; */
+  font-family: 'Carter One', cursive;
+  font-size: 25px;
+  line-height: 20px;
+  margin-top: 20px;
+  margin-left: 25px;
+  z-index: 1;
+}
+
+.logo a{
+  text-decoration: none;
+  color: #fff;
+}
+
+.contact_button #contact_btn{
+  /* margin: 0px 30px 8px 85%; */
+  grid-area: contactbutton;
+  /* margin-left: auto; */
+  /* align-items: end; */
+  border-radius: 25px;
+  background-color: #18252a;
+  padding: 8px 25px 8px 25px;
+  width:50px;
+  border: none;
+  font-size: 13px;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  height: 20px;
+  /* position: relative; */
+}
+#toogle_link{
+  padding-left: 10px;
+  padding-right:10px;
+}
+#toogle_link svg {
+  stroke: #fff;
+  stroke-width: 4;
+  width: 50;
+  height: 40;
+  z-index: 1;
+
+}
+
+#sideNavBarClose svg {
+  stroke: #fff;
+  stroke-width: 4;
+  width: 50;
+  height: 50;
+  z-index: 1;
+  /* padding-left: 10px; */
+  /* padding-right:10px; */
+}
+
+#toogle_link{
+  grid-area: sidebarlink;
+  width:35px;
+}
+
+
+
+
+.contact_button #toogle_link :hover{
+  stroke-width: 6;
+}
+
+.sideNavBar{
+  position: fixed;
+  z-index: 1;
+  margin-right: 0;
+  margin-left: 85%;
+  height: 100%;
+  background: #18252a;
+  transition: all 0.5s ease-out;
+  width:0px;
+  top:0;
+  left:0;
+  overflow-x: hidden;
+  float: right;
+}
+.sideNavBar a{
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 25px;
+  padding: 18px 8px 8px 32px;
+  display: block;
+  transition: 0.3s;
+
+}
+
+#sideNavBarClose{
+  /* padding: 140px 10px 0 125px; */
+  height: 35px;
+  width: 35px
+  top:50px;
+  right:25px;
+  margin-left: 300px;
+}
+
+.sideNavBar #sideNavBarClose :hover{
+  stroke: #3aafa9;
+}
+
+.classname{
+  animation-name: reducetime;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+@keyframes reducetime {
+  from {
+    margin-left: 100%;
+    width: 0;
+  }
+  to {
+    margin-left: 75%;
+    width: 25%;
+  }
+}
+
+.classname1{
+  animation-name: reducetimereverse;
+  animation-duration: 1s;
+
+}
+@keyframes reducetimereverse {
+  from {
+    margin-left: 75%;
+    width: 25%;
+  }
+  to {
+    margin-left: 100%;
+    width: 0;
+  }
+}
+
+.content{
+  grid-area:"content";
+  display: grid;
+  grid-template-area:
+  "main"
+  "sign_up"
+  "sign in"
+  "contact";
+}
+.main{
+  display: grid;
+  grid-area:"main";
+  grid-template-columns: 1fr 2fr 1fr;
+  padding-top: 5%;
+  padding-left: 15%;
+  padding-bottom: 15%;
+  /* grid-template-rows: 1fr 1fr 1fr; */
+  /* grid-template-areas:
+  ... "intro" ...
+  ... "title" ...
+  ... "caption".. ; */
+}
+.intro{
+  grid-area:"intro";
+  grid-column: 2 / 3;
+  /* grid-row: 1 / 2; */
+  font-size: 100px;
+  /* font-family: 'Fredoka One', cursive; */
+  font-family: 'Passion One', cursive;
+  line-height: 70px;
+  letter-spacing: 1px;
+  color: #fff;
+  padding: 5px;
+
+}
+
+.title{
+  grid-area:"title";
+  grid-column: 2 / 3;
+  /* grid-row: 2 / 3; */
+  font-size: 100px;
+  /* font-family: 'Fredoka One', cursive; */
+  font-family: 'Passion One', cursive;
+  padding-top: 10px;
+  line-height: 70px;
+  letter-spacing: 1px;
+  color:#18252a;
+  padding: 5px;
+}
+
+.caption{
+  grid-area: "caption";
+  grid-column: 2 / 3;
+  /* grid-row: 3 / 4; */
+  font-size: 25px;
+  font-family: 'Bangers', cursive;
+  padding-top: 10px;
+  /* line-height: 70px; */
+  letter-spacing: 1px;
+  color:#18252a;
+  padding: 5px;
+}
+
+.signup{
+  grid-area:"sign-up";
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 100px 2fr 0.5fr;
+  position: relative;
+  /* margin: 10px; */
+
+  background: #18252a;
+  /* margin-left: -20px;
+  margin-right: -20px; */
+  /* position: relative; */
+
+}
+
+.signup_right{
+  grid-column: 1/2;
+  grid-row: 3/4;
+
+}
+.signup_header, .signin_header{
+  margin-left: 45%;
+  grid-row:2/3;
+  color: #fff;
+  font-size: 25px;
+  font-family: 'Bangers', cursive;
+  padding-bottom: 20px;
+
+}
+.signup_right input{
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 30px;
+  padding: 10px;
+  font-family: 'Carter One', cursive;
+}
+.signup_right button{
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-top: 30px;
+  border-radius: 25px;
+  padding: 5px 25px;
+  font-family: 'Carter One', cursive;
+  width: 365px;
+}
+.signup_right button:hover{
+  background-color: #3aafa9;
+  border-color: #3aafa9;
+  color: #fff;
+
+}
+.signup_google{
+   background-color: #18252a;
+}
+
+.signup_google_border{
+  border-bottom: 1px solid white;
+  margin-left: 25%;
+  height: 10px;
+  color: white;
+  margin-top: 30px;
+  width: 255px;
+  z-index: -1;
+  padding-left: 20%;
+  background-color: #18252a;
+  /* margin-right: 25%; */
+}
+.signup_google_content{
+    background-color: #18252a;
+    height: 20px;
+    width: 105px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.signup_google_link{
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-top: 30px;
+  border-radius: 25px;
+  padding: 5px 25px;
+  font-family: 'Carter One', cursive;
+  width: 315px;
+  background-color: white;
+}
+.signup_google_link a{
+  padding-left: 40%;
+  text-decoration: none;
+  color: black;
+}
+.signin{
+  display: grid;
+  grid-area: "sign in";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 175px 2fr 0.5fr 0.5fr;
+}
+.signin_left{
+  grid-column:1/2;
+  grid-row: 3/4;
+}
+.signin_google{
+  grid-column:1/2;
+  grid-row: 4/5;
+
+}
+.signin_google_border{
+  border-bottom: 1px solid white;
+  margin-left: 25%;
+  height: 10px;
+  color: white;
+  margin-top: 30px;
+  width: 255px;
+  z-index: -1;
+  padding-left: 20%;
+  background-color: #3aafa9;
+  /* margin-right: 25%; */
+}
+.signin_google_content{
+  background-color: #3aafa9;
+  height: 20px;
+  width: 105px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.signin_google_link{
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-top: 30px;
+  border-radius: 25px;
+  padding: 5px 25px;
+  font-family: 'Carter One', cursive;
+  width: 315px;
+  background-color: white;
+}
+.signin_google_link a{
+  padding-left: 40%;
+  text-decoration: none;
+  color: black;
+}
+.signin_forgetpwd {
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-top: 30px;
+  padding-left: 17%;
+}
+.signin_right{
+
+}
+
+.signin_left input{
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 30px;
+  padding: 10px;
+  font-family: 'Carter One', cursive;
+}
+.signin_left button{
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-top: 30px;
+  border-radius: 25px;
+  padding: 5px 25px;
+  font-family: 'Carter One', cursive;
+  width: 365px;
+}
+.signin_left button:hover{
+  background-color: #18252a;
+  border-color: #3aafa9;
+  color: #fff;
+}
+
+.contactpg{
+  display: grid;
+  grid-area: "contact";
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+  grid-template-rows: 1fr 150px 50px 1fr 150px;
+  background-color: #18252a;
+}
+.contactpg_header{
+  grid-column: 2/3;
+  grid-row: 3/4;
+  color: #fff;
+  margin-left: 10%;
+  padding-bottom: 10px;
+  font-size: 25px;
+  font-family: 'Bangers', cursive;
+}
+.contactpg_form{
+  grid-column: 2/3;
+  grid-row: 4/5;
+  margin-left: 10%;
+}
+
+.contactpg input, textarea{
+  margin-top: 30px;
+  padding: 10px;
+  font-family: 'Carter One', cursive;
+}
+.contactpg_form button{
+  margin-top: 30px;
+  border-radius: 25px;
+  padding: 5px 25px;
+  font-family: 'Carter One', cursive;
+  width: 365px;
+}
+.contactpg_form button:hover{
+  background-color: #3aafa9;
+  border-color: #3aafa9;
+  color: #fff;
+}
+/* sticky header */
+
+.content {
+  /* padding: 16px; */
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 97%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+.contact_success_email{
+  padding: 10% 25%;
+  font-size: 35px;
+  font-family: 'Carter One', cursive;
+}
+
+
+  /* Media CSS */
+
+@media (max-width: 1024px){
+  .signup_left{
+    display: none;
+  }
+
+  #sideNavBarClose svg {
+    stroke: #fff;
+    stroke-width: 4;
+    width: 50;
+    height: 50;
+    z-index: 1;
+  }
+
+  .main{
+    padding-top: 50%;
+    padding-bottom: 85%;
+  }
+
+  @keyframes reducetime {
+    from {
+      margin-left: 100%;
+      width: 0;
+    }
+    to {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  @keyframes reducetimereverse {
+    from {
+      margin-left: 0;
+      width: 100%;
+    }
+    to {
+      margin-left: 100%;
+      width: 0;
+    }
+  }
+  .sideNavBar a{
+    font-size: 75px;
+    padding: 35px 35px 35px 32px;
+    margin-left: 30%;
+    margin-top: 10%;
+  }
+
+  #sideNavBarClose{
+    margin-left: 75%;
+  }
+  .generic_header{
+    font-size: 65px;
+    line-height: 60px;
+  }
+  #toogle_link svg {
+    stroke-width: 10;
+  }
+  .contact_button #toogle_link :hover{
+    stroke-width: 16;
+  }
+  .contact_button{
+    grid-template-areas:
+    "sidebarlink";
+  }
+  #contact_btn{
+    display:none;
+  }
+  .signup, .signin{
+    grid-template-columns: 1fr;
+    font-size: 25px;
+  }
+  .signup_header, .signin_header{
+    margin-left: 25%;
+    font-size: 45px;
+  }
+  .signup_right, .signin_left input{
+    width: 38%;
+    margin-left: 25%;
+    /* margin-right: 35%; */
+  }
+  .signup_right, .signin_left button{
+    width: 40%;
+    margin-left: 25%;
+    /* margin-right: 35% */
+  }
+  .signup_google_border {
+     border-bottom: 1px solid white;
+     margin-left: 25%;
+     height: 12px;
+     color: white;
+     margin-top: 30px;
+     width: 290px;
+     margin-right: 25%;
+     padding-left: 30%;
+     background-color: #18252B;
+     font-size: 20px;
+ }
+  .signup_google_content {
+    background-color: #18252a;
+    height: 20px;
+    width: 150px;
+    padding-left: 25px;
+    padding-right: 0px;
+}
+  .signin_google_border{
+     border-bottom: 1px solid white;
+     margin-left: 25%;
+     height: 12px;
+     color: white;
+     margin-top: 30px;
+     width: 280px;
+     margin-right: 25%;
+     padding-left: 10%;
+     font-size: 20px;
+   }
+   .signin_google_content {
+     background-color: #3aafa9;
+     height: 20px;
+     width: 150px;
+     padding-left: 25px;
+     padding-right: 0px;
+ }
+ .signup_google_link {
+    margin-left: 27%;
+    margin-right: 25%;
+    margin-top: 30px;
+    border-radius: 25px;
+    padding: 0px 25px;
+    font-family: 'Carter One', cursive;
+    width: 315px;
+    background-color: white;
+}
+.signup_google_link a {
+    padding-left: 40%;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.signin_google_link {
+   margin-left: 27%;
+   margin-right: 25%;
+   margin-top: 30px;
+   border-radius: 25px;
+   padding: 0px 25px;
+   font-family: 'Carter One', cursive;
+   width: 315px;
+   background-color: white;
+}
+.signin_google_link a {
+   padding-left: 40%;
+   text-decoration: none;
+   color: black;
+   font-size: 20px;
+}
+.signin_forgetpwd {
+  margin-left: 27%;
+  margin-right: 25%;
+  margin-top: 30px;
+  padding-left: 10%;
+  font-size: 10px;
+}
+   .contactpg_header{
+     grid-column: 2/3;
+     grid-row: 2/3;
+     color: #fff;
+     margin-left: 10%;
+     padding-top: 50px;
+     font-size: 25px;
+     font-family: 'Bangers', cursive;
+   }
+   .contact_success_email{
+     padding: 25% 13%;
+     font-size: 35px;
+     font-family: 'Carter One', cursive;
+   }
+}

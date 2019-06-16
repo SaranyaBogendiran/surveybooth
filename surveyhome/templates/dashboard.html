@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboardstyle.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <b>SURVEY<br>BOOTH</b>
+      </div>
+      <div class="header_list">
+        <ul>
+          <li><a href="">Dashboard</a></li>
+          <li><a href="">Survey</a></li>
+        </ul>
+      </div>
+      <div class="header_createsurvey">
+        <a href="#">Create Survey</a>
+      </div>
+
+      <div class="header_uername">
+        {% if user.is_authenticated %}
+
+            <p class="">{{ user.username }}</p><p class="arrow-up"></p>
+        {% endif %}
+      </div>
+      <div class="">
+        <a href="{% url 'logout' %}">logout</a>
+      </div>
+    </header>
+  </body>
+</html>
