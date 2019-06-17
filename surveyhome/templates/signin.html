@@ -5,23 +5,17 @@
       Log in to get track<br>
       of your suvey response
     </div>
-    <form class="" action="{% url 'login' %}" method="post">
+    <form class="" method="post">
       {% csrf_token %}
-      <input type="text" name="username" value="" size="50" placeholder="Email" required>
-      <input type="password" name="password" value="" size="50" placeholder="Password" required>
-      {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-      {% endif %}
-      <button class="button" type="submit" name="button">Sign In</button>
+      <input id="signin_username" type="text" name="username" value="" size="50" placeholder="Email" required>
+      <p id="signin_username_error"></p>
+      <input id="signin_password" type="password" name="password" value="" size="50" placeholder="Password" required>
+      <p id="username_password_error"></p>
+      <button id="signin_button" data-validate-username-url="{% url 'login' %}" class="button" type="submit" name="button">Sign In</button>
     </form>
     <div class="signin_forgetpwd">
       <a href="{% url 'password_change' %}">Forgot Password?</a>
     </div>
-
   </div>
   <div class="signin_google">
     <div class="signin_google_border">
@@ -32,10 +26,34 @@
     <div class="signin_google_link">
         <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
     </div>
-
-
   </div>
   <div class="signin_right">
-
   </div>
 </div>
+<script src="{% static 'js/jquery.js' %}"></script>
+{% block javascript %}
+<script>
+  $("#signin_button").click(function () {
+    username_error = document.getElementById('signin_username_error');
+    password_error = document.getElementById('username_password_error');
+    username_error.innerHTML = '';
+    password_error.innerHTML = '';
+    var form = $(this).closest("button");
+    $.ajax({
+      url: form.attr("data-validate-username-url"),
+      data: form.serialize(),
+      dataType: 'json',
+      success: function (data) {
+        if (data.is_doesnot_user_exist) {
+          console.log( $(this).val() );
+          $('#username_error').append(data.username_error_message);
+        }
+        if (data.is_password_mismatched) {
+          console.log( $(this).val() );
+          $('#username_password_error').append(data.password_mismatched);
+        }
+      }
+    })
+  });
+</script>
+{% endblock %}

@@ -469,7 +469,11 @@ body{
   font-size: 35px;
   font-family: 'Carter One', cursive;
 }
-
+#username_error,#password_error, #email_error {
+  color: #fff;
+  font-family: 'Carter One', cursive;
+  margin-left: 25%;
+}
 
   /* Media CSS */
 

@@ -16,6 +16,8 @@ from .tokens import account_activation_token
 from django.core.mail import EmailMessage, BadHeaderError, send_mail
 from .forms import ContactForm
 from django.contrib import auth, messages
+from django.http import JsonResponse
+import re
 
 def index(request):
     context={}
@@ -34,10 +36,27 @@ def login_view(request):
         LOGIN_REDIRECT_URL='/surveyhome/'
         return redirect('dashboard')
     else:
-        # Show an error page
-        messages.info(request, 'Your User Name and Password does not match!!')
-        template = 'signin.html'
-        return render(request,template)
+        data = {
+                'is_doesnot_user_exist': not (User.objects.filter(username__iexact=username).exists()) ,
+                'is_password_mismatched': User.objects.filter(username__iexact=username).exists(),
+                }
+        if data['is_doesnot_user_exist']:
+                        data['username_error_message'] = 'User Name is not found. Please register and try again'
+        if data['is_password_mismatched']:
+                        data['password_mismatched'] = 'User Name and password does not match'
+        print("login_else method")
+        return JsonResponse(data)
+
+# def login_validation(request):
+#     data = {
+#                 'is_doesnot_user_exist': not (User.objects.filter(username__iexact=username).exists()) ,
+#                 'is_password_mismatched': User.objects.filter(username__iexact=username).exists(),
+#             }
+#     if data['is_doesnot_user_exist']:
+#                 data['username_error_message'] = 'User Name is not found. Please register and try again'
+#     if data['is_password_mismatched']:
+#                 data['password_mismatched'] = 'User Name and password does not match'
+#     return JsonResponse(data)
 
 def register(request):
     print("entered register view")
@@ -68,9 +87,12 @@ def register(request):
             print(form.errors)
             messages.info(request,form.errors)
             print("form not valid")
+            return redirect('index')
+
     else:
         form = Register()
-    return redirect('index')
+        return redirect('index')
+
 
 def activate(request, uidb64, token):
     try:
@@ -171,3 +193,20 @@ def emailView(request):
 
 def successView(request):
     return render(request, "contact_success_email.html")
+
+
+def validate_registerform(request):
+    username = request.GET.get('username', None)
+    password = request.GET.get('password1', None)
+    confirm_password = request.GET.get('password2', None)
+    EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+    email = request.GET.get('email',None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists(),
+        'invalid_email': not (EMAIL_REGEX.match(str(email)))
+    }
+    if data['is_taken']:
+        data['username_error_message'] = 'A user with this username already exists.'
+    if data['invalid_email']:
+        data['invalid_email_error'] = 'Please enter the valid email ID.'
+    return JsonResponse(data)

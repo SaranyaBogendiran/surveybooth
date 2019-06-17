@@ -5,30 +5,24 @@
       A free account is just<br>
       few clicks away!!
     </div>
-    <form class="" action="{% url 'register' %}" method="post">
+    <form id="signup_form" class="" action="{% url 'register' %}" method="post">
       {% csrf_token %}
-      <input type="text" name="username" value="" size="50" placeholder="Username" required>
+      <input type="text" data-validate-username-url="{% url 'validate_registerform' %}" name="username" value="" size="50" placeholder="Username" id="id_username" required>
+      <p id="username_error"></p>
       <input type="text" name="first_name" value="" size="50" placeholder="First Name" required>
       <input type="text" name="last_name" value="" size="50" placeholder="Second Name" required>
-      <input type="password" name="password1" value="" size="50" placeholder="Password" required>
-      <input type="password" name="password2" value="" size="50" placeholder="Confirm Password" required >
-      <input type="text" name="email" value="" size="50" placeholder="Email" required>
-      {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-      {% endif %}
-      <!-- <input type="text" name="" value="" size="50" placeholder="Email"> -->
-      <button type="submit" name="button">Sign Up</button>
+      <input type="password" name="password1" value="" size="50" placeholder="Password" id="password1" required>
+      <input type="password" data-validate-username-url="{% url 'validate_registerform' %}" name="password2" id='confirm_password' value="" size="50" placeholder="Confirm Password" required >
+      <p id="password_error"></p>
+      <input type="text" data-validate-username-url="{% url 'validate_registerform' %}" name="email" value="" size="50" placeholder="Email" id="email" required>
+      <p id="email_error"></p>
+      <button id="signup_button" data-validate-username-url="{% url 'validate_registerform' %}" type="submit" name="button">Sign Up</button>
     </form>
     <div class="signup_google">
       <div class="signup_google_border">
         <div class="signup_google_content">
           or Sign up With
         </div>
-
       </div>
       <div class="signup_google_link">
         <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
@@ -40,3 +34,94 @@
   <div class="signup_left">
   </div>
 </div>
+<script src="{% static 'js/jquery.js' %}"></script>
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      username_error = document.getElementById('username_error');
+      if(username_error.innerHTML){
+        $('#signup_button').attr('type', 'submit');
+      }
+      username_error.innerHTML = '';
+      var form = $(this).closest("input");
+      $.ajax({
+        url: form.attr("data-validate-username-url"),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            console.log( $(this).val() );
+            $('#username_error').append(data.username_error_message);
+            $('#signup_button').attr('type', 'button');
+          }
+        }
+      });
+
+    });
+    $("#confirm_password").change(function () {
+      var form = $(this).closest("input");
+      var password = document.getElementById("password1").value;
+      var confirmPassword = document.getElementById("confirm_password").value;
+      password_error = document.getElementById('password_error');
+      if(password_error.innerHTML){
+        $('#signup_button').attr('type', 'submit');
+      }
+      password_error.innerHTML = '';
+      if (password != confirmPassword) {
+            $('#password_error').append("passsowrd didn;t match");
+            $('#signup_button').attr('type', 'button');
+        }
+
+    });
+    $("#email").change(function () {
+      var form = $(this).closest("input");
+      email_error = document.getElementById('email_error');
+      if(email_error.innerHTML){
+        $('#signup_button').attr('type', 'submit');
+      }
+      email_error.innerHTML = '';
+      $.ajax({
+        url: form.attr("data-validate-username-url"),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.invalid_email) {
+            console.log( $(this).val() );
+            $('#email_error').append(data.invalid_email_error);
+            $('#signup_button').attr('type', 'button');
+
+          }
+        }
+      });
+    });
+    // $("#signup_button").click(function () {
+    //   var button = $(this).closest("button");
+    //   password_error = document.getElementById('password_error');
+    //   email_error = document.getElementById('email_error');
+    //   username_error = document.getElementById('username_error');
+    //   password_error.innerHTML = '';
+    //   email_error.innerHTML = '';
+    //   username_error.innerHTML = '';
+    //   $.ajax({
+    //     url: button.attr("data-validate-username-url"),
+    //     data: button.serialize(),
+    //     dataType: 'json',
+    //     success: function (data) {
+    //       if (password_error.innerHTML) {
+    //         console.log( $(this).val() );
+    //         $('#username_error').append(data.username_error_message)
+    //       }
+    //       if (data.is_password_matched) {
+    //         console.log( $(this).val() );
+    //         $('#password_error').append(data.password_mismatch);
+    //         $('#signup_form').attr('action', '{}');
+    //       }
+    //       if (data.invalid_email) {
+    //         console.log( $(this).val() );
+    //         $('#email_error').append(data.invalid_email_error)
+    //       }
+    //     }
+    //   });
+    // });
+  </script>
+{% endblock %}
