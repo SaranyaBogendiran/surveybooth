@@ -5,7 +5,7 @@
       Log in to get track<br>
       of your suvey response
     </div>
-    <form class="" method="post">
+    <form action="{% url 'login' %}" class="" method="post">
       {% csrf_token %}
       <input id="signin_username" type="text" name="username" value="" size="50" placeholder="Email" required>
       <p id="signin_username_error"></p>
