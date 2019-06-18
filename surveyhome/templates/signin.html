@@ -5,13 +5,13 @@
       Log in to get track<br>
       of your suvey response
     </div>
-    <form action="{% url 'login' %}" class="" method="post">
+    <form id="signin_form" data-validate-username-url="{% url 'login_validation' %}" class="" method="post">
       {% csrf_token %}
-      <input id="signin_username" type="text" name="username" value="" size="50" placeholder="Email" required>
+      <input id="signin_username" data-validate-username-url="{% url 'login_validation' %}"  type="text" name="username" value="" size="50" placeholder="Email" required>
       <p id="signin_username_error"></p>
-      <input id="signin_password" type="password" name="password" value="" size="50" placeholder="Password" required>
+      <input id="signin_password" data-validate-username-url="{% url 'login_validation' %}" type="password" name="password" value="" size="50" placeholder="Password" required>
       <p id="username_password_error"></p>
-      <button id="signin_button" data-validate-username-url="{% url 'login' %}" class="button" type="submit" name="button">Sign In</button>
+      <button id="signin_button" class="button" type="submit" name="button">Sign In</button>
     </form>
     <div class="signin_forgetpwd">
       <a href="{% url 'password_change' %}">Forgot Password?</a>
@@ -33,27 +33,92 @@
 <script src="{% static 'js/jquery.js' %}"></script>
 {% block javascript %}
 <script>
-  $("#signin_button").click(function () {
+  $("#signin_form").submit(function () {
+    var form = $(this).closest("form");
+    username_password_error = document.getElementById('username_password_error');
+    if(username_password_error.innerHTML){
+      $('#signin_button').attr('type', 'submit');
+    }
+    username_password_error.innerHTML = '';
+    // var form = $(this).closest("input");
     username_error = document.getElementById('signin_username_error');
-    password_error = document.getElementById('username_password_error');
+    if(username_error.innerHTML){
+      $('#signin_button').attr('type', 'submit');
+    }
     username_error.innerHTML = '';
-    password_error.innerHTML = '';
-    var form = $(this).closest("button");
     $.ajax({
       url: form.attr("data-validate-username-url"),
       data: form.serialize(),
       dataType: 'json',
       success: function (data) {
         if (data.is_doesnot_user_exist) {
-          console.log( $(this).val() );
-          $('#username_error').append(data.username_error_message);
+          $('#signin_username_error').append(data.username_error_message);
+          $('#signin_button').attr('type', 'button');
+
         }
         if (data.is_password_mismatched) {
-          console.log( $(this).val() );
           $('#username_password_error').append(data.password_mismatched);
+          $('#signin_button').attr('type', 'button');
+
         }
       }
     })
   });
+
+    // $("#signin_password").change(function () {
+    //   var form = $(this).closest("input");
+    //   username_password_error = document.getElementById('username_password_error');
+    //   if(username_password_error.innerHTML){
+    //     $('#signin_button').attr('type', 'submit');
+    //   }
+    //   username_password_error.innerHTML = '';
+    //   $.ajax({
+    //     url: form.attr("data-validate-username-url"),
+    //     data: form.serialize(),
+    //     dataType: 'json',
+    //     success: function (data) {
+    //       if (data.is_password_mismatched) {
+    //         $('#username_password_error').append(data.password_mismatched);
+    //         $('#signin_button').attr('type', 'button');
+    //
+    //       }
+    //     }
+    //   });
+    // });
+  // $("#signin_form").submit(function () {
+  //   username_error = document.getElementById('signin_username_error');
+  //   password_error = document.getElementById('username_password_error');
+  //   username_error.innerHTML = '';
+  //   password_error.innerHTML = '';
+  //   var form = $(this).closest("form");
+  //   $.ajax({
+  //     url: form.attr("action"),
+  //     data: form.serialize(),
+  //     dataType: 'json',
+  //     success: function (data) {
+  //       console.log('data'+data);
+  //       if (data.is_doesnot_user_exist) {
+  //         console.log( $("#signin_username").val() );
+  //         $('#username_error').append(data.username_error_message);
+  //       }
+  //       if (data.is_password_mismatched) {
+  //         console.log( $("#signin_username").val() );
+  //         $('#username_password_error').append(data.password_mismatched);
+  //       }
+  //     }
+  //     // error: function (data,xhr) {
+  //     //     // console.log("erro r");
+  //     //     // $('#username_password_error').append("User Name and password does not match");
+  //     //     if (data.is_doesnot_user_exist) {
+  //     //       console.log( $("#signin_username").val() );
+  //     //       $('#username_error').append(data.username_error_message);
+  //     //     }
+  //     //     if (data.is_password_mismatched) {
+  //     //       console.log( $("#signin_username").val() );
+  //     //       $('#username_password_error').append(data.password_mismatched);
+  //     //     }
+  //     // }
+  //   })
+  // });
 </script>
 {% endblock %}

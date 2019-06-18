@@ -469,12 +469,16 @@ body{
   font-size: 35px;
   font-family: 'Carter One', cursive;
 }
-#username_error,#password_error, #email_error {
+#username_error,#password_error, #email_error, #signin_username_error, #username_password_error {
   color: #fff;
   font-family: 'Carter One', cursive;
   margin-left: 25%;
 }
-
+#signin_username_error, #username_password_error {
+  color: #fff;
+  font-family: 'Carter One', cursive;
+  margin-left: 25%;
+}
   /* Media CSS */
 
 @media (max-width: 1024px){

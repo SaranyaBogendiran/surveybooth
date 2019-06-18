@@ -17,6 +17,7 @@ from django.core.mail import EmailMessage, BadHeaderError, send_mail
 from .forms import ContactForm
 from django.contrib import auth, messages
 from django.http import JsonResponse
+from django.contrib.auth.hashers import check_password
 import re
 
 def index(request):
@@ -28,36 +29,54 @@ def login_view(request):
     password = request.POST.get('password', '')
     print(username)
     print(password)
-    user = auth.authenticate(username=username, password=password)
+    try:
+        user = auth.authenticate(username=username, password=password)
+
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
     if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
+            # Correct password, and the user is marked "active"
+        auth.login(request, user)
+            # Redirect to a success page.
+        LOGIN_REDIRECT_URL='/surveyhome/'
+        return redirect('dashboard')
+
+def login_validation(request):
+    username = request.GET.get('username', None)
+    password = request.GET.get('password', None)
+    print(username)
+    try:
+        user = auth.authenticate(username=username, password=password)
+        # user1 = User.objects.get(username=username)
+        # print(user1.password)
+        if check_password(password, user.password):
+            password_error = False
+        else:
+            password_error = True
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+        User_doesnt_exist = True
+        print("exception")
+        password_error = True
+
+    data = {
+                'is_doesnot_user_exist': User_doesnt_exist,
+                'is_password_mismatched': password_error,
+            }
+    if data['is_doesnot_user_exist']:
+                data['username_error_message'] = 'User Name is not found. Please register and try again'
+    if data['is_password_mismatched']:
+                data['password_mismatched'] = 'User Name and password does not match'
+
+    if data.is_doesnot_user_exist or data.is_doesnot_user_exist:
+        return JsonResponse(data)
+
+    else:
         auth.login(request, user)
         # Redirect to a success page.
         LOGIN_REDIRECT_URL='/surveyhome/'
         return redirect('dashboard')
-    else:
-        data = {
-                'is_doesnot_user_exist': not (User.objects.filter(username__iexact=username).exists()) ,
-                'is_password_mismatched': User.objects.filter(username__iexact=username).exists(),
-                }
-        if data['is_doesnot_user_exist']:
-                        data['username_error_message'] = 'User Name is not found. Please register and try again'
-        if data['is_password_mismatched']:
-                        data['password_mismatched'] = 'User Name and password does not match'
-        print("login_else method")
-        return JsonResponse(data)
-
-# def login_validation(request):
-#     data = {
-#                 'is_doesnot_user_exist': not (User.objects.filter(username__iexact=username).exists()) ,
-#                 'is_password_mismatched': User.objects.filter(username__iexact=username).exists(),
-#             }
-#     if data['is_doesnot_user_exist']:
-#                 data['username_error_message'] = 'User Name is not found. Please register and try again'
-#     if data['is_password_mismatched']:
-#                 data['password_mismatched'] = 'User Name and password does not match'
-#     return JsonResponse(data)
-
 def register(request):
     print("entered register view")
     if request.method == 'POST':
