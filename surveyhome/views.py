@@ -25,58 +25,26 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def login_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    print(username)
-    print(password)
-    try:
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        print(username)
+        print(password)
         user = auth.authenticate(username=username, password=password)
-
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-
-    if user is not None and user.is_active:
+        if user is not None and user.is_active:
             # Correct password, and the user is marked "active"
-        auth.login(request, user)
+            auth.login(request, user)
             # Redirect to a success page.
-        LOGIN_REDIRECT_URL='/surveyhome/'
-        return redirect('dashboard')
-
-def login_validation(request):
-    username = request.GET.get('username', None)
-    password = request.GET.get('password', None)
-    print(username)
-    try:
-        user = auth.authenticate(username=username, password=password)
-        # user1 = User.objects.get(username=username)
-        # print(user1.password)
-        if check_password(password, user.password):
-            password_error = False
+            LOGIN_REDIRECT_URL='/surveyhome/'
+            return redirect('dashboard')
         else:
-            password_error = True
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-        User_doesnt_exist = True
-        print("exception")
-        password_error = True
-
-    data = {
-                'is_doesnot_user_exist': User_doesnt_exist,
-                'is_password_mismatched': password_error,
-            }
-    if data['is_doesnot_user_exist']:
-                data['username_error_message'] = 'User Name is not found. Please register and try again'
-    if data['is_password_mismatched']:
-                data['password_mismatched'] = 'User Name and password does not match'
-
-    if data.is_doesnot_user_exist or data.is_doesnot_user_exist:
-        return JsonResponse(data)
-
+            # Show an error page
+            messages.info(request, 'Your User Name and Password does not match!!')
+            template = 'signin.html'
+            return render(request,template)
     else:
-        auth.login(request, user)
-        # Redirect to a success page.
-        LOGIN_REDIRECT_URL='/surveyhome/'
-        return redirect('dashboard')
+        return render(request, 'signin.html')
+
 def register(request):
     print("entered register view")
     if request.method == 'POST':
@@ -110,7 +78,7 @@ def register(request):
 
     else:
         form = Register()
-        return redirect('index')
+        return render(request,'signup.html')
 
 
 def activate(request, uidb64, token):
@@ -208,7 +176,7 @@ def emailView(request):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
-    return render(request, "index.html", {'form': form})
+    return render(request, "contactus.html", {'form': form})
 
 def successView(request):
     return render(request, "contact_success_email.html")

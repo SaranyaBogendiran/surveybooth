@@ -10,6 +10,7 @@ header{
   grid-area: "header";
   grid-template-columns: 0.5fr 3fr 4.5fr 1.5fr 1.5fr;
   background-color: #3aafa9;
+  height: 100px;
 }
 
 .logo{
@@ -20,22 +21,33 @@ header{
   color: #fff;
   padding: 20px 30px;
 }
-.header_list a,li{
+.header_list a{
+  text-decoration: none;
+  color: white;
+  display: inline;
+  padding: 10px;
+  font-size: 20px;
+  font-family: 'Carter One', cursive;
+
+}
+
+.header_list li{
   text-decoration: none;
   color: white;
   list-style: none;
   display: inline;
   padding: 10px;
   font-size: 20px;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Carter One', cursive;
 
 }
+
 .header_list ul{
   margin: 32px 0;
 }
 .header_createsurvey{
   grid-column: 4/5;
-  padding: 10px 10px 10px 30px;
+  padding: 10px 10px 10px 25px;
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
   margin: 25px 0;
@@ -52,16 +64,46 @@ header{
 .header_list a:hover{
 
 }
+.header_uername{
+  display:inline-block;
+  padding: 35px;
+  color: white;
+  font-family: 'Carter One', cursive;
 
-header_uername a::after{
-  content:
+}
+#header_uername a{
+  text-decoration: none;
+}
+.header_uername::after{
+	content: "";
+    margin:0 0.5em;
+    display:inline-block;
+    border: 7px solid transparent;
+    border-top:8px solid white;
+    border-bottom:0 none;
+    text-decoration: none;
+
 }
 
-.arrow-up {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  display: inline;
-  border-top: 5px solid black;
+.user_menu{
+  grid-column: 5/6;
+  font-size: 20px;
+  visibility: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 8px 0 rgba(157, 165, 170, 0.5);
+  box-sizing: border-box;
+}
+
+.user_menu a{
+  text-decoration: none;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+
+.user_menu li{
+  padding:10px;
+}
+
+.user_menu ul{
+  list-style-type: none;
 }

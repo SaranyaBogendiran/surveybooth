@@ -22,6 +22,13 @@ function myFunction() {
   }
 }
 
+// open user name
+
+function openUserMenu(){
+  document.getElementById('user_menu').style.visibility = 'visible';
+
+}
+
 function openNavBar() {
 
     document.getElementById('sideNavBar').classList.remove('classname1')

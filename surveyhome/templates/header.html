@@ -17,10 +17,10 @@
   <body>
     <div id="navbar" class="generic_header">
       <div class="logo">
-        <a href="#">SURVEY<br>BOOTH</a>
+        <a href="{% url 'index' %}">SURVEY<br>BOOTH</a>
       </div>
       <div class="contact_button">
-        <a id="contact_btn" href="#"><i>Contact</i></a>
+        <a id="contact_btn" href="{% url 'contactus' %}"><i>Contact</i></a>
         <a id="toogle_link" onclick="openNavBar()">
           <svg class="toogle_line" id="toogle_line" viewbox="0 0 40 40">
             <path id="toogle_link_path" d="M0,5 75,5 M0,20 75,20 M0,35 75,35" />
@@ -34,9 +34,9 @@
                 <path d="M5,25 25,5" />
               </svg>
           </a>
-          <a href="{% url 'register' %}"onclick="closeNavBar();signup()">SIGN UP</a>
-          <a onclick="closeNavBar();signin()">SIGN IN</a>
-          <a onclick="closeNavBar();contact()">CONTACT</a>
+          <a href="{% url 'register' %}" onclick="closeNavBar();signup()">SIGN UP</a>
+          <a href="{% url 'login' %}" onclick="closeNavBar();signin()">SIGN IN</a>
+          <a href="{% url 'contactus' %}" onclick="closeNavBar();contact()">CONTACT</a>
       </div>
     </div>
     {% block content %}
