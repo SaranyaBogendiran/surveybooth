@@ -29,23 +29,18 @@ def login_view(request):
     print(username)
     print(password)
     user = auth.authenticate(username=username, password=password)
-    if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
-        auth.login(request, user)
-        # Redirect to a success page.
-        LOGIN_REDIRECT_URL='/surveyhome/'
-        return redirect('dashboard')
-    else:
-        data = {
-                'is_doesnot_user_exist': not (User.objects.filter(username__iexact=username).exists()) ,
-                'is_password_mismatched': User.objects.filter(username__iexact=username).exists(),
-                }
-        if data['is_doesnot_user_exist']:
-                        data['username_error_message'] = 'User Name is not found. Please register and try again'
-        if data['is_password_mismatched']:
-                        data['password_mismatched'] = 'User Name and password does not match'
-        print("login_else method")
-        return JsonResponse(data)
+    try:
+        if user is not None and user.is_active:
+            # Correct password, and the user is marked "active"
+            auth.login(request, user)
+            print("user is logged in")
+            # Redirect to a success page.
+            LOGIN_REDIRECT_URL='/surveyhome/'
+            return redirect('dashboard')
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        return JsonResponse({'status': 'login failed'})
+    return redirect('index')
+
 
 # def login_validation(request):
 #     data = {

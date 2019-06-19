@@ -5,13 +5,13 @@
       Log in to get track<br>
       of your suvey response
     </div>
-    <form action="{% url 'login' %}" class="" method="post">
+    <form id="signin_form" data-validate-username-url="{% url 'login' %}" class="" method="post">
       {% csrf_token %}
       <input id="signin_username" type="text" name="username" value="" size="50" placeholder="Email" required>
       <p id="signin_username_error"></p>
       <input id="signin_password" type="password" name="password" value="" size="50" placeholder="Password" required>
       <p id="username_password_error"></p>
-      <button id="signin_button" data-validate-username-url="{% url 'login' %}" class="button" type="submit" name="button">Sign In</button>
+      <button id="signin_button" class="button" type="submit" name="button">Sign In</button>
     </form>
     <div class="signin_forgetpwd">
       <a href="{% url 'password_change' %}">Forgot Password?</a>
@@ -33,25 +33,20 @@
 <script src="{% static 'js/jquery.js' %}"></script>
 {% block javascript %}
 <script>
-  $("#signin_button").click(function () {
+  $("#signin_form").submit(function () {
     username_error = document.getElementById('signin_username_error');
     password_error = document.getElementById('username_password_error');
     username_error.innerHTML = '';
     password_error.innerHTML = '';
-    var form = $(this).closest("button");
+    var form = $(this).closest("form");
     $.ajax({
       url: form.attr("data-validate-username-url"),
       data: form.serialize(),
       dataType: 'json',
-      success: function (data) {
-        if (data.is_doesnot_user_exist) {
+
+      error: function (data) {
           console.log( $(this).val() );
-          $('#username_error').append(data.username_error_message);
-        }
-        if (data.is_password_mismatched) {
-          console.log( $(this).val() );
-          $('#username_password_error').append(data.password_mismatched);
-        }
+          $('#username_password_error').append("User Name and password does not match");
       }
     })
   });
