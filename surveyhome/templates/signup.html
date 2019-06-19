@@ -94,34 +94,5 @@
         }
       });
     });
-    // $("#signup_button").click(function () {
-    //   var button = $(this).closest("button");
-    //   password_error = document.getElementById('password_error');
-    //   email_error = document.getElementById('email_error');
-    //   username_error = document.getElementById('username_error');
-    //   password_error.innerHTML = '';
-    //   email_error.innerHTML = '';
-    //   username_error.innerHTML = '';
-    //   $.ajax({
-    //     url: button.attr("data-validate-username-url"),
-    //     data: button.serialize(),
-    //     dataType: 'json',
-    //     success: function (data) {
-    //       if (password_error.innerHTML) {
-    //         console.log( $(this).val() );
-    //         $('#username_error').append(data.username_error_message)
-    //       }
-    //       if (data.is_password_matched) {
-    //         console.log( $(this).val() );
-    //         $('#password_error').append(data.password_mismatch);
-    //         $('#signup_form').attr('action', '{}');
-    //       }
-    //       if (data.invalid_email) {
-    //         console.log( $(this).val() );
-    //         $('#email_error').append(data.invalid_email_error)
-    //       }
-    //     }
-    //   });
-    // });
   </script>
 {% endblock %}

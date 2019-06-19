@@ -18,5 +18,5 @@ url(r'passwordreset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9
 path('email/', views.emailView, name='email'),
 path('success/', views.successView, name='success'),
 url(r'^ajax/validate_registerform/$', views.validate_registerform, name='validate_registerform'),
-# url(r'^ajax/login_validation/(?P<username>[0-9A-Za-z_\-]+)$', views.login_validation, name='login_validation'),
+url(r'^ajax/login_validation/$', views.login_validation, name='login_validation'),
 ]
