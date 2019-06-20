@@ -48,7 +48,7 @@ header{
 .header_createsurvey{
   grid-column: 4/5;
   padding: 10px 10px 10px 25px;
-  font-size: 20px;
+  font-size: 15px;
   font-family: 'Raleway', sans-serif;
   margin: 25px 0;
   border-style: solid;
@@ -87,6 +87,7 @@ header{
 
 .user_menu{
   grid-column: 5/6;
+  grid-row: 2/3;
   font-size: 20px;
   visibility: hidden;
   background-color: #fff;
@@ -106,4 +107,5 @@ header{
 
 .user_menu ul{
   list-style-type: none;
+  padding-left: 15px;
 }

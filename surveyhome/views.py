@@ -197,3 +197,9 @@ def validate_registerform(request):
     if data['invalid_email']:
         data['invalid_email_error'] = 'Please enter the valid email ID.'
     return JsonResponse(data)
+
+
+#Account page display
+
+def profile(request):
+    return render(request,'profile.html')
